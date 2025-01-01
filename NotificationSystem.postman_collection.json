@@ -1,0 +1,70 @@
+{
+	"info": {
+		"_postman_id": "98765432-fedc-ba98-7654-321fedcba987",
+		"name": "Notification System API",
+		"description": "Collection for Notification System API endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Send Notification",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"{{$guid}}\",\n    \"type\": \"email\",\n    \"payload\": {\n        \"subject\": \"Test Notification\",\n        \"content\": \"This is a test notification\"\n    },\n    \"priority\": \"high\",\n    \"recipient\": \"user@example.com\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/notifications",
+					"host": ["{{baseUrl}}"],
+					"path": ["api", "notifications"],
+					"description": "Send a new notification"
+				}
+			}
+		},
+		{
+			"name": "Get Notification Status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/notifications/{{notificationId}}/status",
+					"host": ["{{baseUrl}}"],
+					"path": ["api", "notifications", "{{notificationId}}", "status"],
+					"description": "Get the status of a specific notification"
+				}
+			}
+		},
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/health",
+					"host": ["{{baseUrl}}"],
+					"path": ["api", "health"],
+					"description": "Check the health status of the notification service"
+				}
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000",
+			"type": "string"
+		},
+		{
+			"key": "notificationId",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
